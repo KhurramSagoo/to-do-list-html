@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="./index.css">
+    
+  </head>
+  <body>
+    <div class="centered-div">
+      <!-- This is a centered div with a modern color pattern. -->
+
+      <h1>To-Do List</h1>
+      <div class="inp-btn">
+        <input type="text" id="taskInput"  class="input-btn" placeholder="Enter a task" />
+        <button onclick="addTask()" class="add-btn">Add</button>
+        <ul id="taskList"></ul>
+      </div>
+    </div>
+
+    <script>
+      function addTask() {
+        var taskInput = document.getElementById("taskInput");
+        var taskList = document.getElementById("taskList");
+
+        if (taskInput.value !== "") {
+          var task = document.createElement("li");
+          task.textContent = taskInput.value;
+
+          var removeButton = document.createElement("button");
+          removeButton.className = "remove-button";
+          removeButton.addEventListener("click", removeTask);
+
+          task.appendChild(removeButton);
+          task.addEventListener("click", completeTask);
+          taskList.appendChild(task);
+
+          taskInput.value = "";
+        }
+      }
+
+      function completeTask() {
+        this.classList.toggle("completed");
+      }
+
+      function removeTask(event) {
+        var task = event.target.parentNode;
+        task.parentNode.removeChild(task);
+      }
+    </script>
+  </body>
+</html>
